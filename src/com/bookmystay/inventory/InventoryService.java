@@ -73,6 +73,27 @@ public class InventoryService {
         }
 
     }
+//    check room availability
+    public boolean isAvailable(String roomType){
+        return roomCountMap.getOrDefault(roomType,0)>0;
+    }
 
+    //get room price
+    public double getRoomPrice(String rooomType){
+        return roomPriceMap.get(rooomType);
+    }
+
+    //display only available rooms
+    public void searchRooms(){
+        for(String roomType:roomCountMap.keySet()){
+            if(roomCountMap.get(roomType)>0){
+                System.out.println("Room Type: "+roomType);
+                System.out.println("Price: "+roomPriceMap.get(roomType));
+                System.out.println();
+            }
+        }
+
+
+    }
 
 }
