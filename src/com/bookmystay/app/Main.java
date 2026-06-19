@@ -1,6 +1,8 @@
 package com.bookmystay.app;
 
+import com.bookmystay.booking.BookingQueueService;
 import com.bookmystay.inventory.InventoryService;
+import com.bookmystay.model.Reservation;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,6 +18,12 @@ public class Main {
         inventory.displayInventory();
 
         inventory.searchRooms();
+
+        BookingQueueService bookingQueueService=new BookingQueueService();
+
+        Reservation reservation=new Reservation("Pavan","Single");
+
+        bookingQueueService.enqueue(reservation);
 
     }
 }
