@@ -1,7 +1,6 @@
 package com.bookmystay.inventory;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class InventoryService {
 
@@ -16,6 +15,12 @@ public class InventoryService {
      */
     private Map<String, Double> roomPriceMap = new HashMap<>();
 
+
+    //Store allocated room ids
+    private Set<String> bookedRooms=new HashSet<>();
+
+    //Room type and assigned rooms
+    private Map<String,Set<String>> assignedRooms=new HashMap<>();
 
     /*
      * Add a new room type into inventory
@@ -94,6 +99,20 @@ public class InventoryService {
         }
 
 
+    }
+
+    public void allocateRoom(String roomType){
+        String roomId=roomType+"-"+ UUID.randomUUID();
+        bookedRooms.add(roomId);
+        assignedRooms.computeIfAbsent(roomType,k->
+                new HashSet<>())
+                .add(roomId);
+
+        int availableRooms=roomCountMap.get(roomType);
+
+        roomCountMap.put(roomType,availableRooms=-1);
+
+        System.out.println("Allocated room: "+ roomId);
     }
 
 }
